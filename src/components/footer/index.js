@@ -3,19 +3,22 @@ import Link from '../link'
 import styles from './index.module.css'
 import getNavigation from '../../utils/navigation'
 
-const Aside = () => {
+const Footer = () => {
   const links = getNavigation()
   return (
-    <aside className={styles.container}>
-      {
+    <footer className={styles.footer}>
+      <div>
+        {
           links.map(navElement => {
             return (
-              <Link href={navElement.link} title={navElement.title} type="aside" />
+              <Link href={navElement.link} title={navElement.title} type="footer" />
             )
           })
         }
-    </aside>
+      </div>
+      <p className={styles.university}>Software University 2021</p>
+    </footer>
   )
 }
 
-export default Aside
+export default Footer

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
+import Origam from '../origam/index'
 
 class Origamis extends Component {
   constructor(props) {
@@ -10,6 +11,8 @@ class Origamis extends Component {
     }
   }
 
+  // https://jsonplaceholder.typicode.com/posts
+  // http://localhost:9999/api/origami
   getOrigamis = async () => {
     const promise = await fetch('http://localhost:9999/api/origami')
     const origamis = await promise.json()
@@ -21,11 +24,12 @@ class Origamis extends Component {
   renderOrigamis() {
     const { origamis } = this.state
 
-    return origamis.map(origam => {
+    return origamis.map((origam, index) => {
       return (
-        <div key={origam._id} {...origam}>
-          {origam.description}
-        </div>
+        // <Origam key={origam.userId} author={origam.userId}>{origam.body}</Origam>
+
+        <Origam key={origam._id} index={index} author="someone" {...origam} />
+
       )
     })
   }

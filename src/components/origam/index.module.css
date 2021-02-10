@@ -27,12 +27,12 @@
 
 .user {
   text-decoration: underline;
-  text-align: right;
+  text-align: right; 
   /* border:1px solid green; */
   padding-right: 1%;
 }
 
-.origam-image {
+.image {
   width: 32px;
   height: 32px;
 }
