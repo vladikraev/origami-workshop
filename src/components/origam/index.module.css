@@ -27,7 +27,7 @@
 
 .user {
   text-decoration: underline;
-  text-align: right;
+  text-align: right; 
   /* border:1px solid green; */
   padding-right: 1%;
 }

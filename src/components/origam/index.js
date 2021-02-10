@@ -1,14 +1,15 @@
 import React from 'react'
 import styles from './index.module.css'
-import image from '../images/blue-origami-bird.png'
+import image from '../../images/blue-origami-bird.png'
 
-const Origam = ({ description, author }) => {
+const Origam = ({ description, author, index }) => {
   return (
     <div className={styles.container}>
       <img className={styles.image} src={image} />
-      <div className={styles.description}>
+      <p className={styles.description}>
+        <span>{index} - </span>
         {description}
-      </div>
+      </p>
       <div>
         <span className={styles.user}>
           <small>Author: </small>
