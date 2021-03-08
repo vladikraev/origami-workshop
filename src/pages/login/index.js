@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useContext } from 'react'
 import SubmitButton from '../../components/button/submit-button'
 import Input from '../../components/input'
 import PageLayout from '../../components/page-layout'
@@ -6,73 +6,52 @@ import Title from '../../components/title'
 import styles from './index.module.css'
 import authenticate from '../../utils/authenticate'
 import UserContext from '../../Context'
-class LoginPage extends Component {
-  constructor(props) {
-    super(props)
+import { useHistory } from 'react-router-dom'
 
-    this.state = {
-      email: "",
-      password: ""
-    }
-  }
+const LoginPage = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const context = useContext(UserContext)
+  const history = useHistory()
 
-  static contextType = UserContext
-
-  handleChange = (event, type) => {
-    const newState = {}
-    newState[type] = event.target.value
-
-    this.setState(newState)
-  }
-
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const {
-      username,
-      password
-    } = this.state
 
     await authenticate('http://localhost:9999/api/user/login', {
       username,
       password
     }, (user) => {
-      this.context.logIn(user)
-      this.props.history.push('/')
-    }, () => {
-      console.log('Nooooo, error')
+      context.logIn(user)
+      history.push('/')
+    }, (e) => {
+      console.log('Error', e)
     }
     )
   }
 
-
-  render() {
-    const {
-      username,
-      password
-    } = this.state
-
-    return (
-      <PageLayout>
-        <form className={styles.container} onSubmit={this.handleSubmit}>
-          <Title title="Login" />
-          <Input
-            value={username}
-            onChange={(e) => this.handleChange(e, 'username')}
-            label="Username"
-            id="username"
-          />
-          <Input
-            type="password"
-            value={password}
-            onChange={(e) => this.handleChange(e, 'password')}
-            label="Password"
-            id="password"
-          />
-          <SubmitButton title="Login" />
-        </form>
-      </PageLayout>
-    )
-  }
+  return (
+    <PageLayout>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <Title title="Login" />
+        <Input
+          type="username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          label="Username"
+          id="username"
+        />
+        <Input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          label="Password"
+          id="password"
+        />
+        <SubmitButton title="Login" />
+      </form>
+    </PageLayout>
+  )
 }
+
 
 export default LoginPage
