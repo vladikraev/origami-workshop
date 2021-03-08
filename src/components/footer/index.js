@@ -9,11 +9,10 @@ class Footer extends Component {
 
   render() {
     const {
-      loggedIn,
       user
     } = this.context
 
-    const links = getNavigation(loggedIn, user)
+    const links = getNavigation(user)
     return (
       <footer className={styles.footer}>
         <div>
