@@ -22,7 +22,7 @@ const authenticate = async (url, body, onSuccess, onFailure) => {
     }
 
   } catch (error) {
-    onFailure()
+    onFailure(error)
   }
 }
 
