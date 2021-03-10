@@ -18,6 +18,7 @@ const ProfilePage = () => {
 
   const getData = useCallback(async () => {
     const id = params.userid
+    // console.log(id)
     const response = await fetch(`http://localhost:9999/api/user?id=${id}`)
 
     if (!response.ok) {
@@ -49,7 +50,6 @@ const ProfilePage = () => {
 
         <button onClick={logOut}>Logout</button>
       </div>
-
       <Origamis length={3} />
     </PageLayout>
   )
